@@ -399,7 +399,7 @@ SCRIPT,
 	protected function assert_minified_found( $slug_prefix, $is_js = true, $has_min = true, $has_only_min = false ) {
 		$asset = Assets::init()->get( $slug_prefix . '-' . ( $is_js ? 'script' : 'style' ) );
 
-		$url = get_site_url() . '/wp-content/plugins/assets/tests/_data/' . ( $is_js ? 'js' : 'css' ) . '/' . $slug_prefix;
+		$url = get_home_url() . '/wp-content/plugins/assets/tests/_data/' . ( $is_js ? 'js' : 'css' ) . '/' . $slug_prefix;
 
 		$urls = [];
 

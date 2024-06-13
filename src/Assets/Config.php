@@ -71,7 +71,7 @@ class Config {
 	 */
 	public static function get_url( $path ): string {
 		if ( empty( static::$path_urls[ $path ] ) ) {
-			static::$path_urls[ $path ] = trailingslashit( get_site_url() . $path );
+			static::$path_urls[ $path ] = trailingslashit( get_home_url() . $path );
 		}
 
 		return static::$path_urls[ $path ];
@@ -127,7 +127,7 @@ class Config {
 	 * @return void
 	 */
 	public static function set_path( string $path ) {
-		$content_dir = str_replace( get_site_url(), '', WP_CONTENT_URL );
+		$content_dir = str_replace( get_home_url(), '', WP_CONTENT_URL );
 
 		$plugins_content_dir_position = strpos( $path, $content_dir . '/plugins' );
 		$themes_content_dir_position  = strpos( $path, $content_dir . '/themes' );

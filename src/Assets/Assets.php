@@ -58,7 +58,7 @@ class Assets {
 	 */
 	public function __construct( ?string $base_path = null, ?string $assets_url = null ) {
 		$this->base_path  = $base_path ?: Config::get_path();
-		$this->assets_url = $assets_url ?: trailingslashit( get_site_url() . $this->base_path );
+		$this->assets_url = $assets_url ?: trailingslashit( get_home_url() . $this->base_path );
 		$this->version    = Config::get_version();
 		$this->controller = new Controller( $this );
 		$this->controller->register();
