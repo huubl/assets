@@ -1095,6 +1095,36 @@ SCRIPT,
 	}
 
 	/**
+	 * It should not enqueue any assets when an empty group is requested
+	 *
+	 * @test
+	 */
+	public function should_not_enqueue_any_assets_when_empty_group_is_requested(): void {
+		// Register multiple assets WITHOUT enqueue_on actions
+		// (we don't want them to auto-enqueue, we only want to test group enqueueing)
+		Asset::add( 'test-script-no-group-1', 'test-script-1.js' )
+			->register();
+		Asset::add( 'test-script-no-group-2', 'test-script-2.js' )
+			->register();
+		Asset::add( 'test-style-no-group', 'test-style.css' )
+			->register();
+
+		// Register assets with groups
+		Asset::add( 'test-script-with-group', 'test-script-with-group.js' )
+			->add_to_group( 'existing-group' )
+			->register();
+
+		// Call enqueue_group with a non-existent group (should enqueue nothing)
+		Assets::init()->enqueue_group( 'non-existent-group' );
+
+		// Verify that no assets were enqueued
+		$this->assertFalse( wp_script_is( 'test-script-no-group-1', 'enqueued' ), 'Script without group 1 should not be enqueued' );
+		$this->assertFalse( wp_script_is( 'test-script-no-group-2', 'enqueued' ), 'Script without group 2 should not be enqueued' );
+		$this->assertFalse( wp_style_is( 'test-style-no-group', 'enqueued' ), 'Style without group should not be enqueued' );
+		$this->assertFalse( wp_script_is( 'test-script-with-group', 'enqueued' ), 'Script with different group should not be enqueued' );
+	}
+
+	/**
 	 * Set a constant value using uopz.
 	 *
 	 * @param string $const
