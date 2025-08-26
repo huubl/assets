@@ -537,11 +537,11 @@ class Assets {
 	 * useful where an asset is required in a situation not anticipated when it was originally
 	 * registered.
 	 *
-	 * @param string|array $assets_to_enqueue Which assets will be enqueued.
-	 * @param bool $should_enqueue_no_matter_what Whether to ignore conditional requirements when enqueuing.
+	 * @param string|array $assets_to_enqueue             Which assets will be enqueued.
+	 * @param bool         $should_enqueue_no_matter_what Whether to ignore conditional requirements when enqueuing.
 	 *
 	 * @since 1.0.0
-	 * @since TBD - If explicitly passed an empty array, enqueue nothing.
+	 * @since 1.4.11 - If explicitly passed an empty array, enqueue nothing.
 	 */
 	public function enqueue( $assets_to_enqueue = null, bool $should_enqueue_no_matter_what = false ) {
 		// If explicitly passed an empty array, enqueue nothing.
